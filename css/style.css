@@ -1150,3 +1150,490 @@ body.light-mode .site-footer {
   background: linear-gradient(0deg, rgba(210,225,245,0.98) 0%, rgba(220,232,248,0.95) 100%);
   border-top-color: var(--border);
 }
+
+/* ============================================================
+   NEW MODULES: ROVERS, NEO, SPACE WEATHER, SATELLITES
+   ============================================================ */
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- API KEY PROMPT ---- */
+.api-key-prompt {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+.akp-icon  { font-size: 2.5rem; margin-bottom: 1rem; }
+.akp-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  margin-bottom: 0.75rem;
+}
+.akp-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.akp-desc a { color: var(--accent-blue); }
+.akp-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.akp-note {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+}
+
+/* ---- ROVERS ---- */
+.rovers-container { padding: 1rem 0; }
+.rover-loading, .neo-loading, .sw-loading, .sat-loading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 3rem;
+}
+.rover-section { margin-bottom: 2.5rem; }
+.rover-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.rover-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-orange);
+}
+.rover-status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+.rover-status.active { color: var(--accent-green); }
+.rover-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+.rover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.rover-photo {
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 4/3;
+  background: var(--bg-panel);
+  transition: all 0.25s;
+}
+.rover-photo:hover { border-color: var(--accent-orange); transform: scale(1.02); }
+.rover-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s;
+}
+.rover-photo-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.7);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-secondary);
+  padding: 0.3rem 0.5rem;
+  letter-spacing: 0.1em;
+}
+.rover-empty {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  padding: 1rem 0;
+}
+.rover-empty a { color: var(--accent-blue); }
+
+/* ---- NEO ---- */
+.neo-container { padding: 1rem 0; }
+.neo-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.neo-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+}
+.neo-stat-val {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.neo-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+}
+.neo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+.neo-card {
+  background: var(--bg-card);
+  border: 1px solid;
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: all 0.25s;
+  animation: fadeInUp 0.4s ease both;
+}
+.neo-card:hover { transform: translateY(-2px); }
+.neo-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.neo-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  flex: 1;
+  margin-right: 0.5rem;
+}
+.neo-level {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.neo-stats { display: flex; flex-direction: column; gap: 0.3rem; }
+.neo-row { display: flex; justify-content: space-between; }
+.nl {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+.nv {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+}
+.neo-hazard-flag {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #ff6600;
+  letter-spacing: 0.1em;
+}
+
+/* ---- SPACE WEATHER ---- */
+.sw-container { padding: 1rem 0; }
+.sw-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sw-kp-card, .sw-conditions-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+}
+.sw-section-title {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.sw-kp-display {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.sw-kp-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.sw-kp-info { display: flex; flex-direction: column; gap: 0.3rem; }
+.sw-kp-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+.sw-kp-desc {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+.sw-kp-bar {
+  display: flex;
+  gap: 3px;
+  height: 8px;
+}
+.sw-kp-seg {
+  flex: 1;
+  background: var(--border);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+.sw-cond-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+}
+.sw-cond-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.sw-cond-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+}
+.sw-cond-val {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}
+.sw-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+}
+.sw-flares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.sw-flare-card {
+  border: 1px solid;
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.sw-flare-class {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.sw-flare-time, .sw-flare-region {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+}
+.sw-alert-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+.sw-alert-item:last-child { border-bottom: none; }
+.sw-alert-time {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.sw-alert-msg {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.sw-empty {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-green);
+  padding: 0.5rem 0;
+}
+.sw-source {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 1rem;
+}
+.sw-source a { color: var(--accent-blue); }
+
+/* ---- SATELLITES ---- */
+.sat-container { padding: 1rem 0; }
+.sat-astro-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.sat-astro-icon { font-size: 1.5rem; }
+.sat-astro-count {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+}
+.sat-astro-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+.sat-astro-name {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  background: rgba(0,170,255,0.06);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+}
+.sat-astro-name em { color: var(--accent-blue); font-style: normal; }
+.sat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.sat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease both;
+  transition: all 0.25s;
+}
+.sat-card:hover { border-color: var(--border-glow); box-shadow: var(--glow-blue); }
+.sat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+.sat-icon { font-size: 1.2rem; }
+.sat-info { flex: 1; display: flex; flex-direction: column; gap: 0.1rem; }
+.sat-name {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+.sat-type {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-secondary);
+}
+.sat-live-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+}
+.sat-live-badge.live {
+  background: rgba(0,255,136,0.08);
+  border: 1px solid rgba(0,255,136,0.3);
+  color: var(--accent-green);
+}
+.sat-live-badge.sim {
+  background: rgba(0,170,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.sat-minimap {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--border);
+}
+.sat-telemetry {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.sat-tel-row { display: flex; justify-content: space-between; }
+.stl {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+.stv {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+}
+.sat-source {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 1rem;
+}
+.sat-source a { color: var(--accent-blue); }
+
+/* ---- RESPONSIVE: new tabs ---- */
+@media (max-width: 900px) {
+  .neo-stats-bar { grid-template-columns: 1fr 1fr; }
+  .sw-top-row    { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .neo-stats-bar { grid-template-columns: 1fr; }
+  .rover-grid    { grid-template-columns: 1fr 1fr; }
+}

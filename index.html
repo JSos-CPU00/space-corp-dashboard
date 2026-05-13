@@ -42,6 +42,10 @@
     <button class="nav-tab" data-tab="weather">PLANETARY WEATHER</button>
     <button class="nav-tab" data-tab="markets">MARKETS</button>
     <button class="nav-tab" data-tab="news">INTEL FEED</button>
+    <button class="nav-tab" data-tab="rovers">MARS ROVERS</button>
+    <button class="nav-tab" data-tab="neo">NEAR EARTH OBJECTS</button>
+    <button class="nav-tab" data-tab="spaceweather">SPACE WEATHER</button>
+    <button class="nav-tab" data-tab="satellites">SATELLITES</button>
   </nav>
 
   <!-- Main Content -->
@@ -213,6 +217,50 @@
       </div>
     </section>
 
+  <!-- ======================== MARS ROVERS TAB ======================== -->
+    <section id="tab-rovers" class="tab-panel">
+      <div class="rovers-container">
+        <div class="section-header-row">
+          <h2 class="section-title">MARS ROVER IMAGERY</h2>
+          <button id="refreshRovers" class="btn-refresh">↻ REFRESH</button>
+        </div>
+        <div id="roversContainer">Loading…</div>
+      </div>
+    </section>
+
+    <!-- ======================== NEO TAB ======================== -->
+    <section id="tab-neo" class="tab-panel">
+      <div class="neo-container">
+        <div class="section-header-row">
+          <h2 class="section-title">NEAR EARTH OBJECTS — 7 DAY WINDOW</h2>
+          <button id="refreshNeo" class="btn-refresh">↻ REFRESH</button>
+        </div>
+        <div id="neoContainer">Loading…</div>
+      </div>
+    </section>
+
+    <!-- ======================== SPACE WEATHER TAB ======================== -->
+    <section id="tab-spaceweather" class="tab-panel">
+      <div class="sw-container">
+        <div class="section-header-row">
+          <h2 class="section-title">SPACE WEATHER — NOAA SWPC</h2>
+          <button id="refreshSW" class="btn-refresh">↻ REFRESH</button>
+        </div>
+        <div id="spaceweatherContainer">Loading…</div>
+      </div>
+    </section>
+
+    <!-- ======================== SATELLITES TAB ======================== -->
+    <section id="tab-satellites" class="tab-panel">
+      <div class="sat-container">
+        <div class="section-header-row">
+          <h2 class="section-title">SATELLITE TRACKER</h2>
+          <button id="refreshSats" class="btn-refresh">↻ REFRESH</button>
+        </div>
+        <div id="satellitesContainer">Loading…</div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Customize Modal -->
@@ -259,6 +307,10 @@
   <script src="js/stocks.js"></script>
   <script src="js/news.js"></script>
   <script src="js/charts.js"></script>
+  <script src="js/rovers.js"></script>
+  <script src="js/neo.js"></script>
+  <script src="js/spaceweather.js"></script>
+  <script src="js/satellites.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
