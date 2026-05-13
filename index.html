@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Corp — Mission Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Star field canvas background -->
+  <canvas id="starfield"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <div class="logo-text">
+          <span class="logo-name">SPACE CORP</span>
+          <span class="logo-sub">MISSION CONTROL DASHBOARD</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="mission-clock">
+          <span class="clock-label">MISSION TIME</span>
+          <span id="missionClock" class="clock-value">T+00:00:00</span>
+        </div>
+        <div class="status-pill online">● SYSTEMS NOMINAL</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav Tabs -->
+  <nav class="dashboard-nav">
+    <button class="nav-tab active" data-tab="overview">OVERVIEW</button>
+    <button class="nav-tab" data-tab="weather">PLANETARY WEATHER</button>
+    <button class="nav-tab" data-tab="markets">MARKETS</button>
+    <button class="nav-tab" data-tab="news">INTEL FEED</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+
+    <!-- ======================== OVERVIEW TAB ======================== -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="grid-overview">
+
+        <!-- Earth Weather Widget -->
+        <div class="card card--weather" id="earthWeatherCard">
+          <div class="card-header">
+            <span class="card-icon">🌍</span>
+            <span class="card-title">EARTH CONDITIONS</span>
+            <span class="card-badge">LIVE</span>
+          </div>
+          <div class="card-body weather-body">
+            <div class="weather-main">
+              <span class="weather-icon" id="ow-icon">⏳</span>
+              <div class="weather-temp-group">
+                <span class="weather-temp" id="ow-temp">--</span>
+                <span class="weather-unit">°F</span>
+              </div>
+            </div>
+            <div class="weather-details">
+              <div class="weather-detail"><span class="wlabel">CONDITION</span><span id="ow-cond">--</span></div>
+              <div class="weather-detail"><span class="wlabel">HUMIDITY</span><span id="ow-hum">--%</span></div>
+              <div class="weather-detail"><span class="wlabel">WIND</span><span id="ow-wind">-- mph</span></div>
+              <div class="weather-detail"><span class="wlabel">LOCATION</span><span id="ow-loc">--</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mars Widget -->
+        <div class="card card--mars">
+          <div class="card-header">
+            <span class="card-icon">🔴</span>
+            <span class="card-title">MARS CONDITIONS</span>
+            <span class="card-badge">SIMULATED</span>
+          </div>
+          <div class="card-body weather-body">
+            <div class="weather-main">
+              <span class="weather-icon">🌪️</span>
+              <div class="weather-temp-group">
+                <span class="weather-temp" id="mars-temp">--</span>
+                <span class="weather-unit">°F</span>
+              </div>
+            </div>
+            <div class="weather-details">
+              <div class="weather-detail"><span class="wlabel">CONDITION</span><span id="mars-cond">--</span></div>
+              <div class="weather-detail"><span class="wlabel">PRESSURE</span><span id="mars-pres">--</span></div>
+              <div class="weather-detail"><span class="wlabel">WIND</span><span id="mars-wind">--</span></div>
+              <div class="weather-detail"><span class="wlabel">SOL</span><span id="mars-sol">--</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Stocks Widget -->
+        <div class="card card--stocks">
+          <div class="card-header">
+            <span class="card-icon">📈</span>
+            <span class="card-title">SPACE SECTOR STOCKS</span>
+            <span class="card-badge">DELAYED</span>
+          </div>
+          <div class="card-body" id="stocksOverview">
+            <div class="stock-loading">Loading market data…</div>
+          </div>
+        </div>
+
+        <!-- Latest News Widget -->
+        <div class="card card--news">
+          <div class="card-header">
+            <span class="card-icon">📡</span>
+            <span class="card-title">LATEST TRANSMISSIONS</span>
+          </div>
+          <div class="card-body" id="newsOverview">
+            <div class="news-loading">Acquiring signal…</div>
+          </div>
+        </div>
+
+        <!-- Stock Chart -->
+        <div class="card card--chart">
+          <div class="card-header">
+            <span class="card-icon">📊</span>
+            <span class="card-title">STOCK TREND — 30 DAY</span>
+            <select id="chartStockSelect" class="card-select">
+              <option value="RKLB">RKLB</option>
+              <option value="SPCE">SPCE</option>
+              <option value="ASTR">ASTR</option>
+              <option value="BA">BA</option>
+              <option value="LMT">LMT</option>
+            </select>
+          </div>
+          <div class="card-body chart-body">
+            <canvas id="stockChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Weather Trend Chart -->
+        <div class="card card--tempchart">
+          <div class="card-header">
+            <span class="card-icon">🌡️</span>
+            <span class="card-title">EARTH TEMP — 7 DAY FORECAST</span>
+          </div>
+          <div class="card-body chart-body">
+            <canvas id="tempChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================== WEATHER TAB ======================== -->
+    <section id="tab-weather" class="tab-panel">
+      <div class="grid-weather">
+        <div class="planet-card" id="planet-earth">
+          <div class="planet-visual earth-visual"></div>
+          <h2 class="planet-name">EARTH</h2>
+          <div class="planet-stats" id="earth-stats-full">Loading…</div>
+        </div>
+        <div class="planet-card" id="planet-mars">
+          <div class="planet-visual mars-visual"></div>
+          <h2 class="planet-name">MARS</h2>
+          <div class="planet-stats" id="mars-stats-full">Loading…</div>
+        </div>
+        <div class="planet-card" id="planet-moon">
+          <div class="planet-visual moon-visual"></div>
+          <h2 class="planet-name">LUNAR SURFACE</h2>
+          <div class="planet-stats" id="moon-stats-full">Loading…</div>
+        </div>
+        <div class="planet-card" id="planet-venus">
+          <div class="planet-visual venus-visual"></div>
+          <h2 class="planet-name">VENUS</h2>
+          <div class="planet-stats" id="venus-stats-full">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== MARKETS TAB ======================== -->
+    <section id="tab-markets" class="tab-panel">
+      <div class="markets-container">
+        <div class="markets-header">
+          <h2 class="section-title">SPACE EXPLORATION SECTOR</h2>
+          <span class="markets-note">Data simulated for demonstration. Connect a live API key for real-time quotes.</span>
+        </div>
+        <div class="stocks-grid" id="fullStocksGrid">Loading…</div>
+        <div class="chart-full-wrap">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">📊</span>
+              <span class="card-title">COMPARATIVE PERFORMANCE — 30 DAY</span>
+            </div>
+            <div class="card-body chart-body chart-body--tall">
+              <canvas id="multiStockChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== NEWS TAB ======================== -->
+    <section id="tab-news" class="tab-panel">
+      <div class="news-container">
+        <div class="news-header">
+          <h2 class="section-title">SPACE EXPLORATION INTEL FEED</h2>
+          <button id="refreshNews" class="btn-refresh">↻ REFRESH</button>
+        </div>
+        <div class="news-grid" id="fullNewsGrid">Acquiring signal…</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Customize Modal -->
+  <div id="customizeModal" class="modal" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>⚙ CONFIGURE DASHBOARD</span>
+        <button id="closeModal" class="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">VISIBLE WIDGETS</label>
+        <div class="widget-toggles">
+          <label class="toggle-item"><input type="checkbox" data-widget="earthWeatherCard" checked> Earth Weather</label>
+          <label class="toggle-item"><input type="checkbox" data-widget="card--mars" checked> Mars Conditions</label>
+          <label class="toggle-item"><input type="checkbox" data-widget="card--stocks" checked> Stock Overview</label>
+          <label class="toggle-item"><input type="checkbox" data-widget="card--news" checked> News Feed</label>
+          <label class="toggle-item"><input type="checkbox" data-widget="card--chart" checked> Stock Chart</label>
+          <label class="toggle-item"><input type="checkbox" data-widget="card--tempchart" checked> Temp Chart</label>
+        </div>
+        <label class="modal-label" style="margin-top:1.5rem">LOCATION FOR WEATHER</label>
+        <input id="locationInput" class="modal-input" type="text" placeholder="e.g. Las Cruces, NM" />
+        <button id="saveSettings" class="btn-save">SAVE CONFIGURATION</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customize Button FAB -->
+  <button id="customizeBtn" class="fab" title="Customize Dashboard">⚙</button>
+
+  <script src="js/starfield.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/stocks.js"></script>
+  <script src="js/news.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
