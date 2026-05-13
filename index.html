@@ -31,6 +31,7 @@
           <span id="missionClock" class="clock-value">T+00:00:00</span>
         </div>
         <div class="status-pill online">● SYSTEMS NOMINAL</div>
+        <button id="themeToggle" class="theme-toggle-track" title="Toggle light/dark mode" aria-label="Toggle theme"></button>
       </div>
     </div>
   </header>
@@ -239,8 +240,19 @@
   </div>
 
   <!-- Customize Button FAB -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-course">ICT 372</span>
+      <span class="footer-divider">⬡</span>
+      <span class="footer-text">Created by <strong>Ember Moore</strong> &amp; <strong>Jeremy Sosaya</strong></span>
+      <span class="footer-divider">⬡</span>
+      <span class="footer-year">2026</span>
+    </div>
+  </footer>
+
   <button id="customizeBtn" class="fab" title="Customize Dashboard">⚙</button>
 
+  <script src="js/theme.js"></script>
   <script src="js/starfield.js"></script>
   <script src="js/clock.js"></script>
   <script src="js/weather.js"></script>
